@@ -1,0 +1,48 @@
+:host {
+
+}
+
+.button {
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: 0.2s ease-in;
+
+  &.first {
+    background: var(--bg3);
+
+    p {
+      color: var(--cr1);
+    }
+
+    .click {
+      background: color-mix(in oklab, white 30%, transparent);
+    }
+  }
+
+  p, .click {
+    transition: 0.2s ease-in;
+  }
+
+  .click {
+    pointer-events: none;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: circle 1s ease;
+  }
+}
+
+@keyframes circle {
+  0% {
+    transform: translate(-100%, -100%);
+  }
+
+  100% {
+    transform: translate(-100%, -100%) scale(50);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,19 @@
+:home {
+
+}
+
+.uploader {
+  background: color-mix(in oklab, var(--bg4) 20%, transparent);
+  border: 3px dashed var(--bg4);
+  border-radius: 12px;
+  min-height: 140px;
+
+  &.hover {
+    background: color-mix(in oklab, var(--bg4) 50%, transparent);
+  }
+
+  .info {
+    margin: auto;
+    pointer-events: none;
+  }
+}

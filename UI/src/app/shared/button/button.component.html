@@ -1,0 +1,12 @@
+<div class="button flex-column-w"
+     [ngClass]="[offset, radius, stylish]">
+  <p class="flex-row-w" [class]="font">
+    <ng-content></ng-content>
+  </p>
+  <span class="click"
+        *ngFor="let click of clicks; let i = index"
+        [style.left.px]="click.x"
+        [style.top.px]="click.y"
+        (animationend)="end(i)">
+  </span>
+</div>

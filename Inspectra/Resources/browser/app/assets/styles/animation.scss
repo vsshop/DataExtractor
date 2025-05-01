@@ -1,0 +1,143 @@
+:root {
+  view-transition-name: none;
+	--bounce-easing: linear(
+		0, 0.004, 0.016, 0.035, 0.063, 0.098, 0.141 13.6%, 0.25, 0.391, 0.563, 0.765,
+		1, 0.891 40.9%, 0.848, 0.813, 0.785, 0.766, 0.754, 0.75, 0.754, 0.766, 0.785,
+		0.813, 0.848, 0.891 68.2%, 1 72.7%, 0.973, 0.953, 0.941, 0.938, 0.941, 0.953,
+		0.973, 1, 0.988, 0.984, 0.988, 1
+	);
+}
+
+::view-transition {
+	pointer-events: none;
+}
+
+/*::view-transition-group(.file) {
+	animation-timing-function: var(--bounce-easing);
+	animation-duration: 0.4s;
+}
+
+::view-transition-old(.file):only-child {
+  animation: scale-up 0.4s ease-in reverse;
+  transform-origin: right;
+}
+
+
+@keyframes scale-up {
+  from {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+*/
+
+
+
+
+
+//BASIC
+@keyframes uprise {
+  0% {
+    transform: translateY(10vh);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+.animate-uprise {
+  animation: uprise 0.3s ease-out;
+
+  $base-duration: 0.3s;
+  $increment: 0.05s;
+
+  @for $i from 2 through 10 {
+    &:nth-child(#{$i}) {
+      animation-duration: $base-duration + ($i - 1) * $increment;
+    }
+  }
+}
+
+
+@keyframes side {
+  0% {
+    transform: translateX(-10px);
+    /*opacity: 0.5;*/
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+
+.animate-side {
+  animation: side 0.2s ease-out;
+
+  $base-duration: 0.2s;
+  $increment: 0.2s;
+
+  @for $i from 2 through 10 {
+    &:nth-child(#{$i}) {
+      animation-duration: $base-duration + ($i - 1) * $increment;
+    }
+  }
+}
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 3s ease-out infinite;
+}
+
+
+//CARD
+
+@keyframes size {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+::view-transition-old(view-card-modal) {
+  animation: size 0.3s ease-in;
+}
+
+::view-transition-new(view-card-modal) {
+  animation: size 0.3s ease-in reverse;
+}

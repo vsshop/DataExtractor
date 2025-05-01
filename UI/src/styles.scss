@@ -1,0 +1,72 @@
+@import "./app/assets/styles/styles.scss";
+@import "./app/assets/styles/elements.scss";
+@import "./app/assets/styles/specific.scss";
+@import "./app/assets/styles/animation.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  user-select: none;
+  font-family: "Gilroy";
+  font-size: 16px;
+  font-weight: 500;
+}
+
+html, body, app-root {
+  display: flex;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: var(--bg1);
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  pointer-events: none;
+}
+
+span {
+  white-space: nowrap;
+}
+
+textarea {
+  width: 100%;
+  background: transparent;
+  outline: none;
+  border: none;
+}
+
+input {
+  width: 100%;
+  background: transparent;
+  outline: none;
+  border: none;
+
+  &:placeholder-shown {
+    color: var(--background-third-color) !important;
+  }
+
+  &::placeholder {
+    opacity: 0;
+  }
+}
+
+body {
+  background-size: cover;
+  background-position: center;
+  --bg1: #EAF2F4;
+  --bg2: #FEFEFE;
+  --bg3: #289EAC;
+  --bg4: #97cbc9f7;
+  --bg5: #80C1C5;
+  --bg6: #c8c8c8;
+  --cr1: #ffffff;
+  --cr2: #353743;
+  --cr3: #636666;
+  --cr4: #333333;
+  --br1: #d7d7d7cd;
+  --br2: #9b9a9acd;
+}

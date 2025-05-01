@@ -1,0 +1,51 @@
+.link {
+  text-decoration: underline;
+}
+
+.fixed-modal {
+  z-index: 100;
+  position: fixed;
+  overflow: hidden;
+  border-radius: 0;
+
+  &.window {
+    z-index: 120;
+    right: 4vw;
+    bottom: 16vh;
+    border-radius: 24px;
+  }
+
+  &.full {
+    right: 0vw;
+    bottom: 0vh;
+  }
+}
+
+//GOOGLE
+google-map {
+  transition: 0.2s;
+  overflow: hidden;
+  border-radius: 0;
+
+  &.window {
+    border-radius: 16px;
+  }
+
+  .map-container {
+    transition: 0.5s ease-in;
+  }
+
+  iframe + * {
+    border-radius: 12px;
+    border: 3px dashed var(--background-fifth-color) !important;
+  }
+
+  .yNHHyP-marker-view {
+    &:focus-visible {
+      border-radius: 2px;
+      outline: 2px dashed var(--background-fifth-color) !important;
+    }
+  }
+}
+
+

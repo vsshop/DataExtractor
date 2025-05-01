@@ -1,0 +1,34 @@
+<div class="flex-row-m">
+  <div class="flex-column-h">
+    <ui-panel class="flex-column-m" size="360">
+      <ui-xmlreader class="flex-column-m" />
+    </ui-panel>
+  </div>
+  <div class="flex-column-m pd24 gap20">
+    <div class="flex-row-w gap16">
+      <p class="l1 fsb36 cr2" view="title">CSV Files</p>
+      <ui-button offset="pd12" radius="br12" (click)="clear()">
+        <div class="flex-row-m gap12">
+          <ui-icon url="clear.svg" size="24" />
+          <p class="l1 cr1 fsb16">Clear</p>
+        </div>
+      </ui-button>
+      <ui-button offset="pd12" radius="br12" (click)="next()">
+        <div class="flex-row-m gap12">
+          <ui-icon url="next.svg" size="22" />
+          <p class="l1 cr1 fsb16">Process</p>
+        </div>
+      </ui-button>
+    </div>
+    <div class="flex-column-w bg2 br12 pd24 gap16" >
+      <div class="flex-row-w">
+        <p class="l1 fsb18 cr2">Сhecked Files</p>
+      </div>
+      <ui-csv-files class="flex-column-m" />
+    </div>
+    <div class="flex-column-m bg2 br12 pd24 gap16">
+      <p class="l1 fsb18 cr2">Upload File</p>
+      <ui-uploader class="flex-column-m"/>
+    </div>
+  </div>
+</div>

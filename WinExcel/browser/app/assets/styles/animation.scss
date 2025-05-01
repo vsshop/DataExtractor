@@ -1,0 +1,133 @@
+//BASIC
+@keyframes uprise {
+  0% {
+    transform: translateY(10vh);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+.animate-uprise {
+  animation: uprise 0.3s ease-out;
+
+  $base-duration: 0.3s;
+  $increment: 0.05s;
+
+  @for $i from 2 through 10 {
+    &:nth-child(#{$i}) {
+      animation-duration: $base-duration + ($i - 1) * $increment;
+    }
+  }
+}
+
+
+@keyframes side {
+  0% {
+    transform: translateX(-10px);
+    /*opacity: 0.5;*/
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+
+.animate-side {
+  animation: side 0.2s ease-out;
+
+  $base-duration: 0.2s;
+  $increment: 0.2s;
+
+  @for $i from 2 through 10 {
+    &:nth-child(#{$i}) {
+      animation-duration: $base-duration + ($i - 1) * $increment;
+    }
+  }
+}
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 3s ease-out infinite;
+}
+
+
+//CARD
+
+@keyframes size {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+::view-transition-old(view-card-modal) {
+  animation: size 0.3s ease-in;
+}
+
+::view-transition-new(view-card-modal) {
+  animation: size 0.3s ease-in reverse;
+}
+
+/*//CARD
+@keyframes move-left {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes move-right {
+  0% {
+    transform: translateX(100vw);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+::view-transition-old(view-test) {
+  animation: move-left 0.3s ease-in;
+}
+
+::view-transition-new(view-test) {
+  animation: move-right 0.3s ease-out;
+}
+*/

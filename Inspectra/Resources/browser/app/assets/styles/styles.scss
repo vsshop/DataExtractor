@@ -1,0 +1,194 @@
+@for $i from 1 through 32 {
+  .gap#{$i * 4} {
+    gap: $i * 4px;
+  }
+}
+
+@for $i from 1 through 32 {
+  .pd#{$i * 4} {
+    box-sizing: border-box;
+    padding: $i * 4px;
+  }
+}
+
+
+@for $i from 1 through 32 {
+  .br#{$i * 4} {
+    border-radius: $i * 4px;
+  }
+}
+
+@for $i from 4 through 32 {
+  .fs#{$i * 2} {
+    font-size: $i * 2px;
+  }
+}
+
+@for $i from 4 through 32 {
+  .fsb#{$i * 2} {
+    font-size: $i * 2px;
+    font-weight: bold;
+  }
+}
+
+
+@for $i from 1 through 7 {
+  .cr#{$i} {
+    color: var(--cr#{$i});
+  }
+}
+
+@for $i from 1 through 7 {
+  .bg#{$i} {
+    background: var(--bg#{$i});
+  }
+}
+
+@for $i from 1 through 10 {
+  .l#{$i} {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $i;
+    overflow: hidden;
+    text-align: justify;
+    width: 100%;
+  }
+}
+
+router-outlet.max + * {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.ignore {
+  pointer-events: none;
+}
+
+@mixin scroll {
+  overflow-y: scroll;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ffa667;
+    border-radius: 4px;
+  }
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &.scroll {
+    @include scroll;
+    padding-right: 4px;
+    padding-top: 4px;
+  }
+
+  &.scroll-h {
+    @include scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+
+
+
+.flex-row {
+  @include flex-row;
+}
+
+.flex-row-w {
+  @include flex-row;
+  width: 100%;
+}
+
+.flex-row-h {
+  @include flex-row;
+  height: 100%;
+}
+
+.flex-row-m {
+  @include flex-row;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.flex-column {
+  @include flex-column;
+}
+
+.flex-column-w {
+  @include flex-column;
+  width: 100%;
+}
+
+.flex-column-h {
+  @include flex-column;
+  height: 100%;
+}
+
+.flex-column-m {
+  @include flex-column;
+  width: 100%;
+  height: 100%;
+}
+
+
+.flex-max {
+  flex: 1;
+}
+
+.flex-space {
+  justify-content: space-between;
+}
+
+.fx-m-center {
+  margin: auto;
+}
+
+.fx-m-right {
+  margin: auto;
+  margin-right: 0;
+}
+
+.fx-m-bottom {
+  margin: auto;
+  margin-bottom: 0;
+}
+
+.fx-m-left {
+  margin: auto;
+  margin-left: 0;
+}
+
+.fx-m-top {
+  margin: auto;
+  margin-top: 0;
+}
