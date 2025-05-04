@@ -3,7 +3,7 @@ import { ThemeService } from './core/services/theme.service';
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet class='max'></router-outlet>`
+  template: `<ui-modal/><router-outlet class='max'></router-outlet>`
 })
 export class AppComponent implements OnInit {
   @HostListener("document:mousedown", ["$event"])

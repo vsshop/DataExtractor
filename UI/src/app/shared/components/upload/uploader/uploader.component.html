@@ -1,0 +1,10 @@
+<div class="uploader flex-column-m"
+     [class.hover]="hover">
+  <div class="info flex-column gap24">
+    <ui-icon url="files.svg" size="40" />
+    <div class="fsb16">Drag and Drop file here or Choose File</div>
+    <input type="file" [accept]="accept"
+           #input hidden multiple
+           (change)="onFilesSelected($event)" />
+  </div>
+</div>

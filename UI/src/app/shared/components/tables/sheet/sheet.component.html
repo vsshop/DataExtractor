@@ -1,0 +1,13 @@
+<div class="flex-column-m">
+  <div class="flex-column-m">
+    <ui-table class="flex-column-m" *ngIf="select"
+              [table]="select" [highlight]="highlight"/>
+  </div>
+  <div class="flex-row-w pd12 gap12">
+    <ui-button *ngFor="let table of tables; let i = index"
+               [class.active]="table == select"
+               offset="pd8" radius="br4" (click)="open(table, i)">
+      {{table.name}}
+    </ui-button>
+  </div>
+</div>

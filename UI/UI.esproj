@@ -8,6 +8,7 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\UI\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\app\modules\" />
     <Folder Include="src\app\pages\" />
   </ItemGroup>
 </Project>

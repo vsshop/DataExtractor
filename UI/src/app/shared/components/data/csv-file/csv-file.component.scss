@@ -1,0 +1,19 @@
+:host {
+  cursor: pointer;
+}
+
+.file {
+  pointer-events: none;
+  transition: 0.1s;
+  background: transparent;
+  border-radius: 12px;
+
+  &.active {
+    background: color-mix(in oklab, var(--bg1) 50%, transparent);
+  }
+
+  .content {
+    pointer-events: auto;
+  }
+}
+

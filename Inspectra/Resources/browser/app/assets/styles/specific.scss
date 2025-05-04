@@ -1,4 +1,4 @@
-.trash-icon {
+.red-icon {
   cursor: pointer;
 
   path {
@@ -28,6 +28,16 @@
   }
 }
 
+.error {
+  path {
+    fill: var(--error);
+  }
+}
+.check {
+  path {
+    fill: var(--check);
+  }
+}
 
 
 $ag-background-color: #ffffff;
@@ -87,6 +97,12 @@ $ag-font-size: 12px;
   
   .ag-row-hover {
     background-color: #0f472713 !important;
+  }
+
+  .ag-cell {
+    &.highlight {
+        background: #bb7b7b41 !important;
+    }
   }
   
   .ag-cell-focus {

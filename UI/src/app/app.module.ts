@@ -1,58 +1,63 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { TableComponent } from './shared/sheet/table/table.component';
-import { SheetComponent } from './shared/sheet/sheet.component';
-import { CellButtonComponent } from './shared/sheet/table/cell-button/cell-button.component';
-import { ButtonComponent } from './shared/button/button.component';
-import { IconComponent } from './shared/icon/icon.component';
+import { TableComponent } from './shared/components/tables/sheet/table/table.component';
+import { SheetComponent } from './shared/components/tables/sheet/sheet.component';
+import { ButtonComponent } from './shared/components/basic/button/button.component';
+import { IconComponent } from './shared/components/basic/icon/icon.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UploaderComponent } from './shared/uploader/uploader.component';
-import { CsvFileComponent } from './shared/csv-files/csv-file/csv-file.component';
-import { CsvFilesComponent } from './shared/csv-files/csv-files.component';
-import { ViewDirective } from './directives/view.directive';
+import { ViewDirective } from './shared/directives/view.directive';
 import { ReviewComponent } from './pages/review/review.component';
-import { ReaderComponent } from './shared/reader/reader.component';
-import { ReaderCheckComponent } from './shared/reader/reader-check/reader-check.component';
-import { ReaderEditComponent } from './shared/reader/reader-edit/reader-edit.component';
-import { ReaderInputComponent } from './shared/reader/reader-input/reader-input.component';
-import { ReaderColumnComponent } from './shared/reader/reader-column/reader-column.component';
-import { XMLReaderComponent } from './shared/xmlreader/xmlreader.component';
-import { PanelComponent } from './shared/panel/panel.component';
-import { XMLTableComponent } from './shared/xmlreader/xmltable/xmltable.component';
+import { XMLReaderComponent } from './shared/components/xmlreader/xmlreader.component';
+import { PanelComponent } from './shared/components/basic/panel/panel.component';
+import { CsvFileComponent } from './shared/components/data/csv-file/csv-file.component';
+import { XMLFileComponent } from './shared/components/data/xml-file/xml-file.component';
+import { UploaderComponent } from './shared/components/upload/uploader/uploader.component';
+import { UploadComponent } from './shared/components/upload/upload.component';
+import { TableFileComponent } from './shared/components/data/table-file/table-file.component';
+import { TableManagerComponent } from './shared/components/tables/table-manager/table-manager.component';
+import { TableManagerRowComponent } from './shared/components/tables/table-manager/table-manager-row/table-manager-row.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
+import { ModalErrorsComponent } from './shared/components/modal/modal-errors/modal-errors.component';
+import { ModalReviewComponent } from './shared/components/modal/modal-review/modal-review.component';
+import { ModalEditComponent } from './shared/components/modal/modal-edit/modal-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
     HomeComponent,
+    ReviewComponent,
+
     TableComponent,
     SheetComponent,
-    CellButtonComponent,
     ButtonComponent,
     IconComponent,
     UploaderComponent,
     CsvFileComponent,
-    CsvFilesComponent,
     ViewDirective,
     ReviewComponent,
-    ReaderComponent,
-    ReaderCheckComponent,
-    ReaderEditComponent,
-    ReaderInputComponent,
-    ReaderColumnComponent,
     XMLReaderComponent,
     PanelComponent,
-    XMLTableComponent
+    UploadComponent,
+    XMLFileComponent,
+    TableFileComponent,
+    TableManagerComponent,
+    TableManagerRowComponent,
+    ModalComponent,
+    ModalErrorsComponent,
+    ModalReviewComponent,
+    ModalEditComponent
   ],
   imports: [
     HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
+    BrowserModule, BrowserAnimationsModule,
+    FormsModule, AppRoutingModule,
     AgGridModule
   ],
   providers: [],

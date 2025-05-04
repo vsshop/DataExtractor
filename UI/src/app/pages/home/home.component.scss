@@ -2,8 +2,24 @@
 
 }
 
-.main-file {
-  height: 100%;
-  width: 260px;
-  background: var(--bg2);
+.container {
+  pointer-events: none;
+  filter: blur(2px) grayscale(1);
+  transition: 0.3s;
+
+  &.active {
+    pointer-events: auto;
+    filter: none;
+  }
+}
+
+.next {
+  pointer-events: none;
+  filter: grayscale(1);
+  transition: 0.3s;
+
+  &.active {
+    pointer-events: auto;
+    filter: none;
+  }
 }

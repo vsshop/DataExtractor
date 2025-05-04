@@ -21,8 +21,5 @@
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
   </ItemGroup>
-	<Target Name="BuildFrontend" BeforeTargets="Build">
-		<Exec WorkingDirectory="../ui/src" Command="ng build --configuration production" />
-	</Target>
 
 </Project>

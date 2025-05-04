@@ -1,0 +1,12 @@
+<div *ngIf="(route.ref$ | async) as template"
+     class="container flex-column-m" [@container] #container>
+  <div class="modal bg2 br16">
+    <div class="flex-row-w pd12">
+      <ui-icon class="close red-icon" url="x.svg" size="24" (click)="close()" />
+    </div>
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+  </div>
+</div>
+
+
+

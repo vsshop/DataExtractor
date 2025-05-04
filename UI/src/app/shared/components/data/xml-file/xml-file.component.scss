@@ -1,0 +1,18 @@
+.file {
+  cursor: pointer;
+  border-left: 6px solid color-mix(in oklab, var(--bg3) 20%, transparent);
+  padding-left: 8px;
+  box-sizing: border-box;
+  transition: 0.1s;
+  background: transparent;
+
+  &.active {
+    background: color-mix(in oklab, var(--bg1) 50%, transparent);
+  }
+  &.error {
+    border-left-color: var(--error);
+  }
+  &.check {
+    border-left-color: var(--check);
+  }
+}

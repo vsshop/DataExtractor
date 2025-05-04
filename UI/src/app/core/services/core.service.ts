@@ -50,4 +50,14 @@ export class Core {
       this.zone.run(fn);
     }
   }
+
+  static async read(file: File, encoding: string = 'utf-8') {
+    return await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsText(file, encoding);
+    });
+  }
 }

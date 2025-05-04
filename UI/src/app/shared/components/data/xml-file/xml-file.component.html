@@ -1,0 +1,7 @@
+<div class="file flex-row-m pd12 gap12" [class]="xml?.state"
+     [class.active]="(service.hover$ | async)?.equals(xml)">
+  <div class="l1 cr3 fs16">
+    {{xml?.name ?? "Error"}}
+  </div>
+  <ng-content></ng-content>
+</div>

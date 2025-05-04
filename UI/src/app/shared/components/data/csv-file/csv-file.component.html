@@ -1,0 +1,11 @@
+<div class="file flex-row-m pd12 gap12"
+     [class.active]="(service.hover$ | async)?.equals(csv)">
+  <ui-icon url="file.csv.svg" size="28"
+           [class]="csv?.state" />
+  <div class="l1 fs16">
+    {{csv?.name ?? "Error"}}
+  </div>
+  <div class="content flex-row gap12">
+    <ng-content></ng-content>
+  </div>
+</div>

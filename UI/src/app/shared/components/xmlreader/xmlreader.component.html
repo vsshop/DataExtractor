@@ -1,0 +1,15 @@
+<div class="flex-column-m pd16 gap32">
+  <ui-button class="flex-column-w" offset="pd12" radius="br12" (click)="click()">
+    <div class="flex-row-m gap12">
+      <ui-icon url="file.xml.svg" size="24" />
+      <p class="l1 cr1 fsb16">Index File</p>
+      <input type="file" accept=".xml" hidden #input (change)="onFile($event)" />
+    </div>
+  </ui-button>
+
+  <div class="container flex-column-m gap16">
+    <ui-xml-file *ngFor="let xml of service.openXML$ | async"
+                 class="flex-column-w" [xml]="xml"/>
+  </div>
+</div>
+

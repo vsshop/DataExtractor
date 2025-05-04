@@ -9,8 +9,9 @@
       "@core": [ "src/app/core/services/core.service" ],
       "@browser": [ "src/app/core/services/browser.service" ],
       "@route": [ "src/app/core/services/route.service" ],
-      "@interfaces/*": [ "src/app/interfaces/*" ],
-      "@models/*": [ "src/app/models/*" ],
+      "@interfaces/*": [ "src/app/shared/interfaces/*" ],
+      "@models/*": [ "src/app/shared/models/*" ],
+      "@enums/*": [ "src/app/shared/enums/*" ],
       "@services/*": [ "src/app/services/*" ]
     },
     "strict": true,

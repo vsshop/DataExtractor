@@ -1,0 +1,16 @@
+<div class="flex-column-m gap20">
+  <div class="flex-column-w bg2 br12 pd24 gap12">
+    <div class="flex-row-w">
+      <p class="l1 fsb18 cr2">Сhecked Files</p>
+    </div>
+    <ui-csv-file *ngFor="let csv of service.openCSV$ | async"
+                 class="flex-row-w" [csv]="csv" [@file]>
+      <ui-icon class="red-icon" url="trash.svg" size="24"
+               (click)="onRemove(csv)"/>
+    </ui-csv-file>
+  </div>
+  <div class="flex-column-m bg2 br12 pd24 gap16">
+    <p class="l1 fsb18 cr2">Upload File</p>
+    <ui-uploader class="flex-column-m" (files)="onFiles($event)" />
+  </div>
+</div>

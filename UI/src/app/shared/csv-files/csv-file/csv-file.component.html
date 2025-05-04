@@ -1,9 +1,0 @@
-<div class="file flex-row-m gap12">
-  <ui-icon url="file.csv.svg" size="28" />
-  <div class="l1 fs16">
-    {{file?.name ?? "Error"}}
-  </div>
-  <ui-icon class="trash-icon" *ngIf="!active"
-           url="trash.svg" size="24"
-           (click)="onDelete()"/>
-</div>

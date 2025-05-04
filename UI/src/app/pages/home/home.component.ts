@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Browser } from '@browser';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { RouteService } from '@route';
-import { FileService } from '@services/file.services';
+import { UploadService } from '@services/upload.services';
+import { TableService } from '../../services/table.service';
 
 @Component({
   selector: 'ui-home',
@@ -9,15 +9,18 @@ import { FileService } from '@services/file.services';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
-  constructor(private browser: Browser, private fileService: FileService, private route: RouteService) { }
+  @ViewChild('errors', { static: true }) errors!: TemplateRef<HTMLElement>;
+  constructor(public service: UploadService, private table: TableService, private route: RouteService) { }
 
 
   clear() {
-    this.fileService.load(null);
+    this.service.clear();
   }
 
   next() {
-    this.route.next("review");
+    if (this.service.check) {
+      this.table.tables(this.service.data);
+      this.route.next("review");
+    }
   }
 }

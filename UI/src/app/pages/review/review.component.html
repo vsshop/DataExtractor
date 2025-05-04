@@ -2,10 +2,44 @@
   <div class="main-file flex-column-h pd16 gap12">
     <div class="flex-row-w gap12" (click)="back()">
       <ui-icon class="trash-icon"
-                url="arrow.left.svg" size="20" />
+               url="arrow.left.svg" size="20" />
       <p class="l1 fsb28 cr2" view="title">Tables</p>
     </div>
-    <ui-csv-files class="flex-column-m" expand />
+    <ui-table-file *ngFor="let table of service.tables$ | async"
+                   class="flex-row-w" [table]="table">
+    </ui-table-file>
   </div>
-  <ui-reader class="flex-column-m"/>
+  <div class="flex-column-m pd24 gap16">
+    <ng-container *ngIf="(service.select$ | async) as table; else choose">
+      <div class="flex-row-w gap16">
+        <p class="l1 fsb36 cr2">{{table.name}}</p>
+        <ui-button offset="pd12" radius="br12" (click)="onReview()">
+          <div class="flex-row-m gap12">
+            <ui-icon url="view.svg" size="24" />
+            <p class="l1 cr1 fsb16">Review</p>
+          </div>
+        </ui-button>
+        <ui-button offset="pd12" radius="br12" (click)="onSave()">
+          <div class="flex-row-m gap12">
+            <ui-icon url="save.svg" size="22" />
+            <p class="l1 cr1 fsb16">Save</p>
+          </div>
+        </ui-button>
+      </div>
+      <ui-table-manager class="flex-column-m" [table]="table" [@manager] />
+    </ng-container>
+  </div>
 </div>
+
+<ng-template #choose>
+  <p class="l1 fsb36 cr2">Choose Table</p>
+</ng-template>
+
+
+<ng-template #review>
+  <ui-modal-review />
+</ng-template>
+
+<ng-template #edit>
+  <ui-modal-edit />
+</ng-template>

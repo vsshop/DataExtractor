@@ -1,6 +1,0 @@
-<div class="files flex-column-m gap12"
-     [class.expand]="expand == ''">
-  <p class="l1 fsb14 cr2" *ngIf="files.length == 0">No File</p>
-  <ui-csv-file class="flex-row-w" *ngFor="let file of files"
-               [file]="file" [@file] [active]="expand == ''"/>
-</div>

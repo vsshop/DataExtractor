@@ -1,0 +1,8 @@
+ui-button {
+  opacity: 1;
+  transition: 0.2s ease-in;
+
+  &.active {
+    opacity: 0.7;
+  }
+}

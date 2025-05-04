@@ -1,0 +1,8 @@
+<div class="file flex-row-m pd12 gap12"
+     [class.active]="(service.select$ | async) == table">
+  <ui-icon url="table.svg" size="24" />
+  <div class="l1 fs16">
+    {{table?.name ?? "Error"}}
+  </div>
+  <ng-content></ng-content>
+</div>
