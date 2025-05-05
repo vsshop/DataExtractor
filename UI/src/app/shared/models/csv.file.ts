@@ -9,7 +9,7 @@ export class CSVFile {
   equals(other: CSVFile | XMLFile | null | undefined): boolean {
     return !!other && this.name.toLowerCase() === other.name.toLowerCase();
   }
-  static async read(file: File, encoding: string = 'windows-1251', split: string = ';'): Promise<CSVFile> {
+  static async read(file: File, encoding: string = 'iso-8859-1', split: string = ';'): Promise<CSVFile> {
     const text = await Core.read(file, encoding);
     const name = file.name.replace(/\.[^/.]+$/, '');
     const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
