@@ -22,7 +22,7 @@ export class TableFile {
     return this.columnsOriginal;
   }
 
-  async save() {
+  async save(encoding: string = 'iso-8859-1') {
     const rowCount = Math.max(...this.dataModified.map(col => col.length));
     const rows = Array.from({ length: rowCount }, (_, rowIndex) =>
       this.dataModified.map(col => col[rowIndex] ?? '')
@@ -34,7 +34,7 @@ export class TableFile {
 
     const bomCsv = '\uFEFF' + csv; // добавим BOM для Excel
 
-    const blob = new Blob([bomCsv], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob([bomCsv], { type: `text/csv;charset=${encoding};` });
     const url = URL.createObjectURL(blob);
 
     if (this.picker) {
