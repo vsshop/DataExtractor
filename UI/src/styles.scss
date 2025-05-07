@@ -72,3 +72,21 @@ body {
   --error: #bb7b7b;
   --check: #5eb4ad;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #97cbc9f7;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #74b4b2f7;
+}

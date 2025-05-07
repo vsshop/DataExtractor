@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Table } from '@interfaces/table.interface';
 
 @Component({

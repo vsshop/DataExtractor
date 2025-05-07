@@ -22,7 +22,7 @@ export class TableFile {
     return this.columnsOriginal;
   }
 
-  async save(encoding: string = 'iso-8859-1') {
+  content(encoding: string = 'iso-8859-1') {
     const rowCount = Math.max(...this.dataModified.map(col => col.length));
     const rows = Array.from({ length: rowCount }, (_, rowIndex) =>
       this.dataModified.map(col => col[rowIndex] ?? '')
@@ -32,33 +32,7 @@ export class TableFile {
       row.map(cell => cell.replace(/"/g, '""')).join(';')
     ).join('\r\n');
 
-    const bomCsv = '\uFEFF' + csv; // добавим BOM для Excel
-
-    const blob = new Blob([bomCsv], { type: `text/csv;charset=${encoding};` });
-    const url = URL.createObjectURL(blob);
-
-    if (this.picker) {
-      const handle = await this.picker.call(window, {
-        suggestedName: `${this.name}.csv`,
-        types: [{
-          description: 'CSV file',
-          accept: { 'text/csv': ['.csv'] },
-        }]
-      });
-      const writable = await handle.createWritable();
-      await writable.write(bomCsv); // важно
-      await writable.close();
-    } else {
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${this.name}.csv`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
+    const blob = new Blob(['\uFEFF' + csv], { type: `text/csv;charset=${encoding};` });
+    return blob.arrayBuffer();
   }
-
-  private get picker() {
-    return (window as any).showSaveFilePicker ?? null;
-  }
-
 }

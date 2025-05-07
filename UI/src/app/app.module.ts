@@ -26,6 +26,7 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { ModalErrorsComponent } from './shared/components/modal/modal-errors/modal-errors.component';
 import { ModalReviewComponent } from './shared/components/modal/modal-review/modal-review.component';
 import { ModalEditComponent } from './shared/components/modal/modal-edit/modal-edit.component';
+import { AppLocalizationModule } from './app-localization.module';
 
 @NgModule({
   declarations: [
@@ -57,8 +58,8 @@ import { ModalEditComponent } from './shared/components/modal/modal-edit/modal-e
   imports: [
     HttpClientModule,
     BrowserModule, BrowserAnimationsModule,
-    FormsModule, AppRoutingModule,
-    AgGridModule
+    FormsModule, AgGridModule,
+    AppRoutingModule, AppLocalizationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

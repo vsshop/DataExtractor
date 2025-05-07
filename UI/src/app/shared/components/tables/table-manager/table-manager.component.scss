@@ -1,0 +1,11 @@
+:host {}
+
+.container {
+  max-height: calc(100vh - 120px);
+
+  .table {
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+}
+

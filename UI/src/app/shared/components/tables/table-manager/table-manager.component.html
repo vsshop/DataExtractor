@@ -1,7 +1,9 @@
 <ng-container *ngIf="table">
-  <div class="flex-column-m bg2 br12 pd24 gap16">
-    <ui-table-manager-row *ngFor="let _ of table.count; let i = index"
-                          class="flex-row-w" [table]="table" [index]="i"/>
+  <div class="container flex-column-m bg2 br12 pd24">
+    <div class="table flex-column-m gap16">
+      <ui-table-manager-row *ngFor="let _ of table.count; let i = index"
+                            class="flex-row-w" [table]="table" [index]="i" />
+    </div>
   </div>
 </ng-container>
 

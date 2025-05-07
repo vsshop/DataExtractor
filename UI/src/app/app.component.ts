@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ThemeService } from './core/services/theme.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,11 @@ export class AppComponent implements OnInit {
     event.preventDefault();
   }
 
-  constructor(private theme: ThemeService) { }
+  constructor(private theme: ThemeService, private translate: TranslateService) {
+    translate.addLangs(['en']);
+    translate.setDefaultLang('en');
+    translate.use('en');
+  }
 
   ngOnInit(): void {
     this.theme.theme$.subscribe(t => document.body.className = t);

@@ -4,11 +4,13 @@
        [class.active]="(service.openXML$ | async)?.length">
 
     <div class="tools flex-row-w gap16">
-      <p class="l1 fsb36 cr2" view="title">CSV Files</p>
+      <p class="l1 fsb36 cr2" view="title">{{'INSCRIPTIONS.TITLE1' | translate}}</p>
       <ui-button offset="pd12" radius="br12" (click)="clear()">
         <div class="flex-row-m gap12">
           <ui-icon url="clear.svg" size="24" />
-          <p class="l1 cr1 fsb16">Clear</p>
+          <p class="l1 cr1 fsb16">
+            {{'BUTTON.CLEAR' | translate}}
+          </p>
         </div>
       </ui-button>
       <div class="next flex-column"
@@ -16,7 +18,9 @@
         <ui-button offset="pd12" radius="br12" (click)="next()">
           <div class="flex-row-m gap12">
             <ui-icon url="next.svg" size="22" />
-            <p class="l1 cr1 fsb16">Process</p>
+            <p class="l1 cr1 fsb16">
+              {{'BUTTON.PROCES' | translate}}
+            </p>
           </div>
         </ui-button>
       </div>
@@ -28,9 +32,5 @@
 
 
 <ng-template #errors>
-  <p class="clamp1 fsb18 cr3">Angular</p>
-  <p class="clamp1 fsb18 cr3">Asp .Net Core</p>
-  <p class="clamp1 fsb18 cr3">Blazor</p>
-  <p class="clamp1 fsb18 cr3">Entity Framework</p>
-  <p class="clamp1 fsb18 cr3">SignalR</p>
+  
 </ng-template>

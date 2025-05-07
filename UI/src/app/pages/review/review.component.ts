@@ -45,6 +45,6 @@ export class ReviewComponent implements OnInit {
 
   onSave() {
     const table = this.service.table;
-    if (table) table.save();
+    if (table) this.service.save();
   }
 }

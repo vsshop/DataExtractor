@@ -1,0 +1,19 @@
+{
+  "BUTTON": {
+    "INDEX": "Index File -",
+    "CLEAR": "Clear",
+    "SAVE": "Save",
+    "PROCES": "Process",
+    "REVIEW": "Review",
+    "ORIGINAL": "Original *",
+    "MODIFIED": "Modified *"
+  },
+  "INSCRIPTIONS": {
+    "TITLE1": "CSV Files |",
+    "TITLE2": "Choose Table |",
+    "TABLES": "Tables -",
+    "CHECKED": "Checked Files1",
+    "UPLOAD": "Upload Files2",
+    "DROP": "Drag and Drop file here or Choose File3"
+  }
+}

@@ -3,6 +3,7 @@ import { TableFile } from '@models/table.file';
 import { Table } from '../../../interfaces/table.interface';
 import { TableService } from '../../../../services/table.service';
 import { take } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ui-modal-review',
@@ -12,14 +13,14 @@ import { take } from 'rxjs/operators';
 export class ModalReviewComponent implements OnInit {
   tables: Table<string[]>[] = [];
   highlights: boolean[][][] = [];
-  constructor(private service: TableService) { }
+  constructor(private service: TableService, private translate: TranslateService) { }
 
   ngOnInit() {
     const table = this.service.table;
     if (table) {
       this.tables = [
-        { name: 'Original', columns: table.columnsOriginal, rows: this.rows(table.dataOriginal) },
-        { name: 'Modified', columns: table.columnsModified, rows: this.rows(table.dataModified) }
+        { name: this.translate.instant("BUTTON.ORIGINAL"), columns: table.columnsOriginal, rows: this.rows(table.dataOriginal) },
+        { name: this.translate.instant("BUTTON.MODIFIED"), columns: table.columnsModified, rows: this.rows(table.dataModified) }
       ]
 
       const hightlights = this.diff(table);

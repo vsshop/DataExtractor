@@ -2,7 +2,7 @@
   <ui-button class="flex-column-w" offset="pd12" radius="br12" (click)="click()">
     <div class="flex-row-m gap12">
       <ui-icon url="file.xml.svg" size="24" />
-      <p class="l1 cr1 fsb16">Index File</p>
+      <p class="l1 cr1 fsb16"> {{'BUTTON.INDEX' | translate}}</p>
       <input type="file" accept=".xml" hidden #input (change)="onFile($event)" />
     </div>
   </ui-button>

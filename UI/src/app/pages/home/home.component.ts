@@ -19,6 +19,7 @@ export class HomeComponent {
 
   next() {
     if (this.service.check) {
+      this.table.select(null);
       this.table.tables(this.service.data);
       this.route.next("review");
     }
