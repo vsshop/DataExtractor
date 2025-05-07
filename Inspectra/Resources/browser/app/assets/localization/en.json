@@ -1,19 +1,19 @@
 {
   "BUTTON": {
-    "INDEX": "Index File -",
-    "CLEAR": "Clear",
-    "SAVE": "Save",
-    "PROCES": "Process",
-    "REVIEW": "Review",
+    "INDEX": ".xml",
+    "CLEAR": "Entfernen",
+    "SAVE": "Speichern",
+    "PROCES": "Start",
+    "REVIEW": "Vorschau",
     "ORIGINAL": "Original *",
-    "MODIFIED": "Modified *"
+    "MODIFIED": "Geändert *"
   },
   "INSCRIPTIONS": {
-    "TITLE1": "CSV Files |",
-    "TITLE2": "Choose Table |",
-    "TABLES": "Tables -",
-    "CHECKED": "Checked Files1",
+    "TITLE1": ".csv",
+    "TITLE2": "Tabele wählen",
+    "TABLES": "Tabelen aus .xml",
+    "CHECKED": ".csv Datein",
     "UPLOAD": "Upload Files2",
-    "DROP": "Drag and Drop file here or Choose File3"
+    "DROP": "Schieben/Wählen Datein"
   }
 }
