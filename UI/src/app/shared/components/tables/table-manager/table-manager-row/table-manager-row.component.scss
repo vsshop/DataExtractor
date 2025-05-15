@@ -8,7 +8,11 @@
   }
 
   &.active {
-    border-left: 6px solid color-mix(in oklab, var(--error) 80%, transparent);
+    border-left: 6px solid color-mix(in oklab, var(--error) 0%, transparent);
     background: color-mix(in oklab, var(--error) 10%, transparent);
+  }
+
+  &.rename {
+    border-left: 6px solid color-mix(in oklab, var(--error) 80%, transparent);
   }
 }

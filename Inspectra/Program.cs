@@ -10,6 +10,7 @@ namespace Inspectra
         static void Main(string[] args)
         {
             var app = App.Create(args);
+            app.Services.AddSingleton<DataChangesService>();
             app.Services.AddSingleton<FileDialogService>();
 
             app.Start<Main>();

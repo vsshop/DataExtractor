@@ -1,11 +1,13 @@
 <ng-container *ngIf="table">
   <div class="table flex-row-m pd12 gap16"
-       [class.active]="table.modifiers[index]">
+       [class.active]="table.modifiers[index]"
+       [class.rename]="rename">
     <div class="flex-row-w">
       <p class="l1">{{table.columnsOriginal[index]}}</p>
     </div>
     <div class="flex-row-w pd4">
-      <input [(ngModel)]="table.columnsModified[index]">
+      <input [(ngModel)]="table.columnsModified[index]"
+             (ngModelChange)="onRename()">
     </div>
     <ui-icon class="green-icon" url="edit.svg" size="24" (click)="onEdit()" />
   </div>

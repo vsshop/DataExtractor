@@ -10,16 +10,19 @@
 
   <ItemGroup>
     <PackageReference Include="EmbedIO" Version="3.5.2" />
+    <PackageReference Include="EPPlus" Version="8.0.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3179.45" />
   </ItemGroup>
 
   <ItemGroup>
+	<Content Include="Data\**\*.*">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
     <Folder Include="Resources\" />
 	<Content Include="Resources\**\*.*">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
   </ItemGroup>
-
 </Project>
