@@ -3,6 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import { TableFile } from "@models/table.file";
 import JSZip from 'jszip';
 import { DataService } from "./data.services";
+import { Browser } from "../core/services/browser.service";
 
 @Injectable({
   providedIn: "root"
@@ -20,7 +21,7 @@ export class TableService {
   private tablesSubject = new BehaviorSubject <TableFile[] | null>(null)
   tables$ = this.tablesSubject.asObservable();
 
-  constructor(data: DataService) {
+  constructor(data: DataService, private browser: Browser) {
     data.data$.pipe().subscribe(info => {
       if (!info) return;
 
@@ -83,11 +84,8 @@ export class TableService {
       zip.file(`${file.name}.csv`, new Uint8Array(buffer)); 
     }
 
-    const zipBlob = await zip.generateAsync({ type: 'blob' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(zipBlob);
-    a.download = 'tables.zip';
-    a.click();
-    URL.revokeObjectURL(a.href);
+    const content = await zip.generateAsync({ type: 'uint8array' });
+    const base64 = btoa(String.fromCharCode(...content));
+    this.browser.invoke("SaveAngular", base64)
   }
 }

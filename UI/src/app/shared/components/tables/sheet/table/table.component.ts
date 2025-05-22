@@ -14,6 +14,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
   @Input() table: Table<string[]> | null = null;
   @Input() highlight: boolean[][] = [];
   @Input() editable: boolean[] = [];
+  @Input() hide: boolean = false;
 
   rows: string[][] = [];
   columns: ColDef[] = [];
@@ -21,12 +22,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
     enableCellTextSelection: true,
     copyHeadersToClipboard: true,
     defaultColDef: {  editable: true },
-    suppressClipboardPaste: false,
-    processDataFromClipboard: (params) => {
-      console.log('Clipboard paste:', params.data); // вот тут сработает
-
-      return params.data;
-    }
+    suppressClipboardPaste: false
   };
   constructor(private service: TableService) { }
 
@@ -35,10 +31,12 @@ export class TableComponent implements OnChanges, AfterViewInit {
     if (!this.table) return;
 
     this.rows = this.table.rows;
-    this.columns = this.table.columns.map((col, i) => ({
+    this.columns = this.table.columns
+      .map((col, i) => ({
       headerName: col, colId: col,
       editable: this.editable[i] ?? false,
       filter: true, flex: 1,
+      hide: this.hide && col == '',
       minWidth: Math.max(120, col.length * 10),
       cellClass: (params: any) => {
         const rowIndex = params.node.rowIndex;
@@ -58,7 +56,6 @@ export class TableComponent implements OnChanges, AfterViewInit {
   }
 
   onPasteStart(event: any) {
-    console.log(123);
     const pastedData: string[][] = event.data;
     const startRow = event.api.getFocusedCell()?.rowIndex ?? 0;
     const column = event.api.getFocusedCell()?.column;

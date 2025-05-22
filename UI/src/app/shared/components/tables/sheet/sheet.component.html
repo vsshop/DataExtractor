@@ -1,7 +1,7 @@
 <div class="flex-column-m">
   <div class="flex-column-m">
     <ui-table class="flex-column-m" *ngIf="select"
-              [table]="select" [highlight]="highlight"/>
+              [table]="select" [highlight]="highlight" [hide]="hide"/>
   </div>
   <div class="flex-row-w pd12 gap12">
     <ui-button *ngFor="let table of tables; let i = index"
