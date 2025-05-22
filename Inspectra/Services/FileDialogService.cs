@@ -1,4 +1,5 @@
 ﻿using Inspectra.Attributes;
+using System.IO.Compression;
 
 namespace Inspectra.Services
 {
@@ -8,6 +9,25 @@ namespace Inspectra.Services
         public string[] OpenAngular(string type = "*.csv", bool multiselect = false)
         {
             return Open(type, multiselect).ToArray();
+        }
+        
+        [Angular]
+        public void SaveAngular(string[] base64)
+        {
+            if(base64.Length > 0)
+            {
+                var dialog = new FolderBrowserDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var name = $"DLS{DateTime.Now.ToString("MMMM-dd-hh-mm-ss")}";
+                    var folder = Path.Combine(dialog.SelectedPath, name);
+                    Directory.CreateDirectory(folder);
+
+                    var bytes = Convert.FromBase64String(base64[0]);
+                    using var zipStream = new MemoryStream(bytes);
+                    ZipFile.ExtractToDirectory(zipStream, folder);
+                }
+            }
         }
 
         public IEnumerable<string> Open(string type, bool multiselect = false)

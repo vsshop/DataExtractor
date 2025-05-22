@@ -9,6 +9,7 @@ import { Table } from '@interfaces/table.interface';
 export class SheetComponent implements OnInit {
   @Input() tables: Table<string[]>[] = [];
   @Input() highlights: boolean[][][] = [];
+  @Input() hide: boolean = false;
   highlight: boolean[][] = [];
   select: Table<string[]> | null = null;
 
