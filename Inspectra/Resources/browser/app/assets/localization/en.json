@@ -1,6 +1,6 @@
 {
   "BUTTON": {
-    "INDEX": ".xml",
+    "INDEX": ".xml anhängen",
     "CLEAR": "Entfernen",
     "SAVE": "Speichern",
     "PROCES": "Start",
@@ -12,8 +12,8 @@
     "TITLE1": ".csv",
     "TITLE2": "Tabele wählen",
     "TABLES": "Tabelen aus .xml",
-    "CHECKED": ".csv Datein",
+    "CHECKED": " ",
     "UPLOAD": "Upload Files2",
-    "DROP": "Schieben/Wählen Datein"
+    "DROP": "Schieben / Wählen .csv Dateien"
   }
 }
