@@ -17,7 +17,8 @@ namespace Inspectra.Services
             if(base64.Length > 0)
             {
                 var dialog = new FolderBrowserDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
+                if (dialog.ShowDialog() == DialogResult.OK && 
+                    !string.IsNullOrWhiteSpace(dialog.SelectedPath))
                 {
                     var name = $"DLS{DateTime.Now.ToString("MMMM-dd-hh-mm-ss")}";
                     var folder = Path.Combine(dialog.SelectedPath, name);
