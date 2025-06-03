@@ -38,6 +38,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
+            Text = "DLS Konverter";
             ResumeLayout(false);
         }
 

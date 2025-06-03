@@ -23,16 +23,26 @@ export class TableFile {
   }
 
   content(encoding: string = 'iso-8859-1') {
-    const rowCount = Math.max(...this.dataModified.map(col => col.length));
+    const validIndices = this.columnsModified
+      .map((col, idx) => col.length > 0 ? idx : -1)
+      .filter(idx => idx >= 0);
+
+    const filteredHeaders = validIndices.map(i => this.columnsModified[i]);
+    const filteredDataCols = validIndices.map(i => this.dataModified[i]);
+
+    const rowCount = filteredDataCols.length
+      ? Math.max(...filteredDataCols.map(col => col.length))
+      : 0;
+
     const rows = Array.from({ length: rowCount }, (_, rowIndex) =>
-      this.dataModified.map(col => col[rowIndex] ?? '')
+      filteredDataCols.map(col => col[rowIndex] ?? '')
     );
 
-    const csv = [this.columnsModified, ...rows].map(row =>
-      row.map(cell => cell.replace(/"/g, '""')).join(';')
-    ).join('\r\n');
+    const csvLines = [filteredHeaders, ...rows]
+      .map(row => row.map(cell => cell.replace(/"/g, '""')).join(';'));
 
-    const blob = new Blob(['\uFEFF' + csv], { type: `text/csv;charset=${encoding};` });
+    const blob = new Blob(['\uFEFF' + csvLines.join('\r\n')], { type: `text/csv;charset=${encoding};` });
     return blob.arrayBuffer();
   }
+
 }
