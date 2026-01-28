@@ -1,19 +1,19 @@
 {
   "BUTTON": {
-    "INDEX": ".xml anhängen",
-    "CLEAR": "Entfernen",
-    "SAVE": "Speichern",
-    "PROCES": "Start",
-    "REVIEW": "Vorschau",
+    "INDEX": "Index File -",
+    "CLEAR": "Clear",
+    "SAVE": "Save",
+    "PROCES": "Process",
+    "REVIEW": "Review",
     "ORIGINAL": "Original *",
-    "MODIFIED": "Geändert *"
+    "MODIFIED": "Modified *"
   },
   "INSCRIPTIONS": {
-    "TITLE1": ".csv",
-    "TITLE2": "Tabele wählen",
-    "TABLES": "Tabelen aus .xml",
-    "CHECKED": " ",
+    "TITLE1": "CSV Files |",
+    "TITLE2": "Choose Table |",
+    "TABLES": "Tables -",
+    "CHECKED": "Checked Files1",
     "UPLOAD": "Upload Files2",
-    "DROP": "Schieben / Wählen .csv Dateien"
+    "DROP": "Drag and Drop file here or Choose File3"
   }
 }
