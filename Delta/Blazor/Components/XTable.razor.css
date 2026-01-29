@@ -1,0 +1,38 @@
+﻿.table {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 8px 0;
+}
+.table table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.table th {
+  position: sticky;
+  top: 0;
+  background: #f7f7f7;
+  z-index: 1;
+  text-align: left;
+}
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 6px 8px;
+  font-size: 14px;
+}
+.table th.red, .table td.red {
+  border: 1px solid red;
+  background: rgba(255, 0, 0, 0.1882352941);
+}
+.table th.Info, .table td.Info {
+  border: 1px solid blue;
+  background: rgba(17, 17, 169, 0.1490196078);
+}
+.table th.Warning, .table td.Warning {
+  border: 1px solid orange;
+  background: rgba(141, 109, 50, 0.231372549);
+}
+.table th.Error, .table td.Error {
+  border: 1px solid red;
+  background: rgba(255, 0, 0, 0.1882352941);
+}

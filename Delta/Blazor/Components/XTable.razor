@@ -1,0 +1,39 @@
+@using System.Data
+@inject UITableService UITable
+
+<div class="table column-m">
+    <div class="hds-toolbar">
+        <label>Таблица:</label>
+        <p>@Ctx.Table.Title</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                @foreach (var column in Ctx.Table.Columns)
+                {
+                    var cls = Ctx.ColumnsLog.Contains(column.Id) ? "red" : "";
+                    <th class="@cls">@column.Title</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Ctx.Table.Rows)
+            {
+                <tr>
+                    @foreach (var col in Ctx.Table.Columns)
+                    {
+                        var value = col.Index < row.Cells.Count ? row.Cells[col.Index] : "";
+                        var cls = Ctx.CellsLog.FirstOrDefault(l => l.Column == col.Id && l.Row == row.Id);
+
+                        <td @key="(row.Id, col.Id)" class="@cls?.Level" title="@cls?.Message"> @value </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [CascadingParameter] public required TablePipelineContext Ctx { get; set; }
+}

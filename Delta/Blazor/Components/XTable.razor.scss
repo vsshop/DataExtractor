@@ -1,0 +1,45 @@
+.table {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 8px 0;
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        position: sticky;
+        top: 0;
+        background: #f7f7f7;
+        z-index: 1;
+        text-align: left;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 6px 8px;
+        font-size: 14px;
+
+        &.red {
+            border: 1px solid red;
+            background: #ff000030;
+        }
+
+        &.Info {
+            border: 1px solid blue;
+            background: #1111a926;
+        }
+
+        &.Warning {
+            border: 1px solid orange;
+            background: #8d6d323b;
+        }
+
+        &.Error {
+            border: 1px solid red;
+            background: #ff000030;
+        }
+    }
+}

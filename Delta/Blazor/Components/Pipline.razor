@@ -1,0 +1,29 @@
+<CascadingValue Value="Ctx">
+    @if (ChildContent is not null)
+    {
+        @ChildContent
+    }
+    else
+    {
+        <XTable/>
+    }
+</CascadingValue>
+
+@code 
+	{
+	[Parameter, EditorRequired] public Func<TablePipelineContext, Task>? Apply { get; set; }
+	[CascadingParameter] public required TablePipelineContext Ctx { get; set; }
+	[CascadingParameter] public required MetaPipeline Meta { get; set; }
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+
+	private int index { get; set; }
+
+	protected override void OnInitialized() => index = Meta.Register();
+	protected override void OnParametersSet()
+	{
+		Ctx.TryApply(index, async context =>
+		{
+			if (Apply is not null) await Apply.Invoke(context);
+		});		
+	}
+}

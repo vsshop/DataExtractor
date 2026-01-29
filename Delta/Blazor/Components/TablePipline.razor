@@ -1,0 +1,45 @@
+@inject UITableService UITable
+
+<div class="column-m scroll">
+	<CascadingValue Value="meta">
+		<CascadingValue Value="ctx">
+
+			<Pipline Apply="UITable.ApplyRename">
+				<Pipline Apply="UITable.ApplySorting">
+					<Pipline Apply="UITable.ApplyReplace">
+						<Pipline Apply="UITable.ApplyValidate"/>
+					</Pipline>
+				</Pipline>
+			</Pipline>
+
+		</CascadingValue>
+	</CascadingValue>
+	<div class="row-w">
+		<p class="l1">@meta.Step</p>
+		<div>
+			<input type="range" min="0" max="@meta.Steps" step="1" @bind="meta.Step" />
+		</div>
+	</div>
+</div>
+
+
+
+@code {
+	[Parameter] public required Table Table { get; set; }
+
+	private MetaPipeline meta = default!;
+	private TablePipelineContext ctx = default!;
+
+	protected override void OnInitialized()
+	{
+		meta = new MetaPipeline();
+		meta.OnStepChange += () => RebuildCtx();
+	}
+
+	protected override void OnParametersSet() => RebuildCtx();
+	protected override void OnAfterRender(bool firstRender)
+	{
+		if (firstRender) InvokeAsync(StateHasChanged);
+	}
+	protected void RebuildCtx() => ctx = TablePipelineContext.Build(Table, meta.Step);
+}

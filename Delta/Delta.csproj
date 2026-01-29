@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<SelfContained>true</SelfContained>
+		<PublishSingleFile>true</PublishSingleFile>
+		<PublishTrimmed>false</PublishTrimmed>
+		<RootNamespace>Delta</RootNamespace>
+		<TargetFramework>net10.0-windows10.0.17763.0</TargetFramework>
+		<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Remove="compilerconfig.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="10.0.30" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Blazor\Pages\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="compilerconfig.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Delta.Application\Delta.Application.csproj" />
+	  <ProjectReference Include="..\Delta.Domain\Delta.Domain.csproj" />
+	  <ProjectReference Include="..\Delta.Excel\Delta.Excel.csproj" />
+	</ItemGroup>
+</Project>
