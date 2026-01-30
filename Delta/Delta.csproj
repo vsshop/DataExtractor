@@ -21,9 +21,6 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Blazor\Pages\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <None Include="compilerconfig.json" />
 	</ItemGroup>
 	<ItemGroup>

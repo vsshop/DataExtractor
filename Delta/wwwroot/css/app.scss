@@ -18,6 +18,23 @@ html, body, #app {
   overflow: hidden;
 }
 
+body {
+  --bg1: #EAF2F4;
+  --bg2: #FEFEFE;
+  --bg3: #289EAC;
+  --bg4: #97cbc9f7;
+  --bg5: #80C1C5;
+  --bg6: #c8c8c8;
+  --cr1: #ffffff;
+  --cr2: #353743;
+  --cr3: #636666;
+  --cr4: #333333;
+  --br1: #d7d7d7cd;
+  --br2: #9b9a9acd;
+  --error: #bb7b7b;
+  --check: #5eb4ad;
+}
+
 img {
   max-width: 100%;
   max-height: 100%;

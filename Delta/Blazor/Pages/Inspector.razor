@@ -1,0 +1,144 @@
+@page "/"
+@inject DataService DataService
+@inject ReaderService ReaderService
+@inject TableBuildService BuildService
+@inject UITableService UITable
+@inject NavigationManager Nav
+
+<div class="row-m inspector-page">
+    <aside class="sidebar column-m">
+        <div class="sidebar-header">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+            </svg>
+            <span class="header-text">Index File</span>
+            <InputFile OnChange="HandleXMLSelected" multiple class="file-input" />
+        </div>
+        <nav class="menu-list column-w">
+            @if(xml is not null)
+            {
+                @foreach (DataTable table in xml.Tables)
+                {
+                    <button class="menu-item" @onclick="() => SelectMenuItem(table.TableName)">
+                        @table.TableName
+                    </button>
+                }
+            }
+        </nav>
+    </aside>
+
+    <main class="content column-m">
+        <header class="toolbar row-w space">
+            <h1 class="title">CSV Files</h1>
+            <div class="row gap12">
+                <button class="btn-icon" @onclick="Clear" title="Clear">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"/>
+                    </svg>
+                </button>
+                <button class="btn-primary" @onclick="Process">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+                    </svg>
+                    <span>Process</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-body column-w gap24">
+            <section class="card">
+                <div class="card-header">
+                    <h2>Checked Files</h2>
+                    @if (inspectorData.Any())
+                    {
+                        <span class="badge">@inspectorData.Count</span>
+                    }
+                </div>
+                <div class="card-body">
+                    @if (inspectorData.Any())
+                    {
+                        <div class="file-list column-w gap8">
+                            @foreach (var data in inspectorData)
+                            {
+                                <div class="chip row gap8">
+                                    <svg class="chip-icon" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z"/>
+                                    </svg>
+                                    <span class="chip-text">@data.Name</span>
+                                    <button class="chip-remove" @onclick="() => RemoveFile(data)">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state column gap16">
+                            <svg class="empty-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2Z"/>
+                            </svg>
+                            <span class="empty-text">No files selected</span>
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <h2>Upload Files</h2>
+                </div>
+                <div class="card-body">
+                    <FileUpload Text="Drop files here or click to browse" OnChange="HandleFileSelected" />
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+
+@code {
+    private DataSet? xml;
+    private string? selectedMenu;
+    private List<InspectorData> inspectorData = new();
+
+    private class InspectorData
+    {
+        public string Name { get; set; } = string.Empty;
+    }
+
+    private void SelectMenuItem(string item)
+    {
+        selectedMenu = item;
+    }
+
+    private void Clear()
+    {
+        inspectorData.Clear();
+    }
+
+    private void Process()
+    {
+        Nav.NavigateTo("/process");
+    }
+
+    private void RemoveFile(InspectorData data)
+    {
+        inspectorData.Remove(data);
+    }
+
+    private async Task HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        UITable.Tables = await BuildService.Build(xml!, e.GetMultipleFiles());
+        foreach (var file in e.GetMultipleFiles())
+        {
+            inspectorData.Add(new InspectorData { Name = file.Name });
+        }
+    }
+
+    private async Task HandleXMLSelected(InputFileChangeEventArgs e)
+    {
+        xml = await ReaderService.ReadAsync(e.File);
+    }
+}

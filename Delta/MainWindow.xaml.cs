@@ -21,6 +21,7 @@ public partial class MainWindow : Window
         builder.Services.AddScoped<ReaderService>();
         builder.Services.AddScoped<DataService>();
         builder.Services.AddScoped<UITableService>();
+        builder.Services.AddScoped<TableBuildService>();
 
         var app = builder.Build();
 

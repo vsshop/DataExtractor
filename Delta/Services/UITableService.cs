@@ -9,6 +9,7 @@ namespace Delta.Services;
 
 public class UITableService(RenameService renameService, SortingService sortingService, ReplaceService replaceService, ValidateService validateService)
 {
+    public List<Table> Tables { get; set; } = new();
     public async Task ApplyRename(TablePipelineContext context)
     {
         var list = await renameService.Rename();

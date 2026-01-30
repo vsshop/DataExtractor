@@ -15,6 +15,7 @@ public static class DependencyInjection
 
             services.AddScoped<XLSXReaderService>();
             services.AddScoped<CSVReaderService>();
+            services.AddScoped<XMLReaderService>();
             services.AddScoped<IReaderService, BrowserFileReaderService>();
 
             return services;

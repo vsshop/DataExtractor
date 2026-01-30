@@ -1,0 +1,22 @@
+@inject NavigationManager NavManager
+
+<nav class="app-nav">
+    <button class="nav-button @GetActiveClass("/app")" @onclick='() => Navigate("/app")'>
+        Table Pipeline
+    </button>
+    <button class="nav-button @GetActiveClass("/inspector")" @onclick='() => Navigate("/inspector")'>
+        Data Inspector
+    </button>
+</nav>
+
+@code {
+    private void Navigate(string path)
+    {
+        NavManager.NavigateTo(path);
+    }
+
+    private string GetActiveClass(string path)
+    {
+        return NavManager.Uri.EndsWith(path) ? "active" : "";
+    }
+}

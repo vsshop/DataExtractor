@@ -10,5 +10,21 @@
   {
     "outputFile": "Blazor/Components/XTable.razor.css",
     "inputFile": "Blazor/Components/XTable.razor.scss"
+  },
+  {
+    "outputFile": "Blazor/Pages/Inspector.razor.css",
+    "inputFile": "Blazor/Pages/Inspector.razor.scss"
+  },
+  {
+    "outputFile": "Blazor/Components/Button.razor.css",
+    "inputFile": "Blazor/Components/Button.razor.scss"
+  },
+  {
+    "outputFile": "Blazor/Components/FileUpload.razor.css",
+    "inputFile": "Blazor/Components/FileUpload.razor.scss"
+  },
+  {
+    "outputFile": "Blazor/Components/Navigation.razor.css",
+    "inputFile": "Blazor/Components/Navigation.razor.scss"
   }
 ]

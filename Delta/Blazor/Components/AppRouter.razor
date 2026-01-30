@@ -1,4 +1,6 @@
-<Router AppAssembly="@typeof(Index).Assembly">
+@inject NavigationManager Navigation
+
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" />
     </Found>
@@ -6,6 +8,7 @@
         <div class="not-found">
             <h1>404 - Page Not Found</h1>
             <p>The page you're looking for doesn't exist.</p>
+            <button @onclick='() => Navigation.NavigateTo("/app")'>Go to Table Pipeline</button>
         </div>
     </NotFound>
 </Router>

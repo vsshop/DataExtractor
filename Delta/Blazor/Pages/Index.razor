@@ -1,0 +1,25 @@
+@page "/process"
+@inject DataService Data
+@inject UITableService UITable
+
+<div class="row-m">
+    <div class="column-h">
+        @foreach (var table in UITable.Tables)
+        {
+            <button @onclick="() => SelectTable(table)">@table.Title</button>
+        }
+    </div>
+    <div class="column-m">
+        @if (Table is not null)
+        {
+            <TablePipline Table="Data.Table"></TablePipline>
+        }
+    </div>
+</div>
+
+
+@code
+{
+    Table? Table { get; set; }
+    public async Task SelectTable(Table table) => Table = table;
+}

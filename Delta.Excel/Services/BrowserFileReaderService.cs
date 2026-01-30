@@ -2,13 +2,11 @@
 using Delta.Domain.Implements;
 using Delta.Excel.Extensions;
 using Delta.Excel.Interfaces;
-using ExcelDataReader;
 using Microsoft.AspNetCore.Components.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Delta.Excel.Services;
 
-public class BrowserFileReaderService(XLSXReaderService xlsx, CSVReaderService csv) : IReaderService
+public class BrowserFileReaderService(XLSXReaderService xlsx, CSVReaderService csv, XMLReaderService xml) : IReaderService
 {
     public async Task<Result<DataSet>> ReadAsync(IBrowserFile file)
     {
@@ -21,6 +19,7 @@ public class BrowserFileReaderService(XLSXReaderService xlsx, CSVReaderService c
         {
             ".xlsx" or ".xls" => await xlsx.ReadAsync(bytes),
             ".csv" => await csv.ReadAsync(bytes),
+            ".xml" => await xml.ReadAsync(bytes),
             _ => Result<DataSet>.Validation("")
         };
     }

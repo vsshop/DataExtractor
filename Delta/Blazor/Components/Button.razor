@@ -1,0 +1,17 @@
+<button class="button @Class" type="button" @onclick="OnClick">
+    @if (!string.IsNullOrEmpty(Icon))
+    {
+        <span>@Icon</span>
+    }
+    @if (!string.IsNullOrEmpty(Text))
+    {
+        <p>@Text</p>
+    }
+</button>
+
+@code {
+    [Parameter] public string Text { get; set; } = "";
+    [Parameter] public string Icon { get; set; } = "";
+    [Parameter] public string Class { get; set; } = "";
+    [Parameter] public EventCallback OnClick { get; set; }
+}

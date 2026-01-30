@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Delta.Domain.Models.MTable;
 
 namespace Delta.Application.Extensions;
 
@@ -29,6 +30,5 @@ public static class DataTableExtensions
                         .Select(Map<T>)
                         .ToList();
         }
-
     }
 }

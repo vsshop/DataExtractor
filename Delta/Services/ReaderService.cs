@@ -6,7 +6,7 @@ namespace Delta.Services;
 
 public class ReaderService(IReaderService reader)
 {
-    public async Task<DataSet> Read(IBrowserFile file)
+    public async Task<DataSet> ReadAsync(IBrowserFile file)
     {
         var data = await reader.ReadAsync(file);
         if (!data) throw new Exception();
