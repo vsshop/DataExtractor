@@ -23,7 +23,11 @@ public class PreloadService(IReaderService reader)
             var table = await reader.ReadAsync(csv);
             CSVTables.Add(Table.BuildFromDataSet(table.Value!));
         }
+    }
 
+    public async Task BuildTables()
+    {
+        Tables = new();
         foreach (var table in CSVTables)
         {
             var scheme = XMLTables.FirstOrDefault(t => t.TitleInvariant == table.TitleInvariant);

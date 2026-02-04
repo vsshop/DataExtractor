@@ -109,8 +109,9 @@
         inspectorData.Clear();
     }
 
-    private void Process()
+    private async Task Process()
     {
+        await Preloader.BuildTables();
         Nav.NavigateTo("/process");
     }
 
