@@ -1,9 +1,9 @@
 ﻿using System.Windows;
+using Delta.File;
 using Delta.Application;
-using Delta.Excel;
-using Delta.Services;
-using Microsoft.Extensions.DependencyInjection;
 using Telemetry.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Delta.Services;
 
 namespace Delta;
 
@@ -17,11 +17,13 @@ public partial class MainWindow : Window
         builder = WebHybridBuilder.CreateBuilder();
 
         builder.Services.AddApplication();
-        builder.Services.AddExcelServices();
-        builder.Services.AddScoped<ReaderService>();
+        builder.Services.AddReaderServices();
+
         builder.Services.AddScoped<DataService>();
-        builder.Services.AddScoped<UITableService>();
-        builder.Services.AddScoped<TableBuildService>();
+        builder.Services.AddScoped<PreloadService>();
+
+        builder.Services.AddScoped<UISvgService>();
+        builder.Services.AddScoped<UITimerService>();
 
         var app = builder.Build();
 

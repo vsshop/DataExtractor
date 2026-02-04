@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
-        xmlns:local="clr-namespace:Delta"
+        xmlns:local="clr-namespace:Delta"  
         xmlns:pages="clr-namespace:Delta.Blazor.Pages"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Delta" Height="900" Width="1600">
+        mc:Ignorable="d" 
+        WindowStartupLocation="CenterScreen" Icon="/Assets/app.ico"
+        Title="Delta" Height="900" Width="1400">
     <blazor:BlazorWebView HostPage="wwwroot\index.html" Services="{DynamicResource services}">
         <blazor:BlazorWebView.RootComponents>
             <blazor:RootComponent Selector="#app" ComponentType="{x:Type pages:App}" />

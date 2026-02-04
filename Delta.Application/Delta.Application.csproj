@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Delta.Domain\Delta.Domain.csproj" />
-	  <ProjectReference Include="..\Delta.Excel\Delta.Excel.csproj" />
+	  <ProjectReference Include="..\Delta.File\Delta.File.csproj" />
+	  <ProjectReference Include="..\Delta.Pipline\Delta.Pipeline.csproj" />
 	</ItemGroup>
 </Project>

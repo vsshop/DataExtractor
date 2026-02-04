@@ -11,6 +11,7 @@ public class Table
     public StateCode State { get; set; }
     public List<Row> Rows { get; set; } = new();
     public List<Column> Columns { get; set; } = new();
+    public string TitleInvariant => Title.ToLowerInvariant();
     public Table Clone() => new()
     {
         Id = Id,
@@ -24,6 +25,7 @@ public class Table
     {
         var columnCount = 0;
         var instanse = new Table();
+        instanse.Id = Guid.NewGuid();
         instanse.Title = table.TableName;
         foreach (DataColumn column in table.Columns)
         {
@@ -34,6 +36,7 @@ public class Table
                 Title = column.ColumnName,
             };
             instanse.Columns.Add(col);
+            columnCount++;
         }
 
         foreach (DataRow row in table.Rows)
@@ -48,5 +51,10 @@ public class Table
         }
 
         return instanse;
+    }
+
+    public static Table BuildFromDataSet(DataSet data)
+    {
+        return BuildFromDataTable(data.Tables[0]);
     }
 }

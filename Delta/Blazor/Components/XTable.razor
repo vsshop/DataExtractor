@@ -1,39 +1,249 @@
 @using System.Data
-@inject UITableService UITable
 
-<div class="table column-m">
-    <div class="hds-toolbar">
-        <label>Таблица:</label>
-        <p>@Ctx.Table.Title</p>
-    </div>
-
-    <table>
-        <thead>
-            <tr>
-                @foreach (var column in Ctx.Table.Columns)
-                {
-                    var cls = Ctx.ColumnsLog.Contains(column.Id) ? "red" : "";
-                    <th class="@cls">@column.Title</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var row in Ctx.Table.Rows)
-            {
+<div class="xtable-container">
+    <div class="xtable-wrapper">
+        <table class="xtable">
+            <thead>
                 <tr>
-                    @foreach (var col in Ctx.Table.Columns)
+                    @foreach (var column in Ctx.Table.Columns)
                     {
-                        var value = col.Index < row.Cells.Count ? row.Cells[col.Index] : "";
-                        var cls = Ctx.CellsLog.FirstOrDefault(l => l.Column == col.Id && l.Row == row.Id);
-
-                        <td @key="(row.Id, col.Id)" class="@cls?.Level" title="@cls?.Message"> @value </td>
+                        var cls = Ctx.Log.FirstOrDefault(l => l.Column == column.Id && l.Row == default);
+                        <th class="@cls?.Level">
+                            <div class="th-content">
+                                <span class="column-title">@column.Title</span>
+                                @if (cls != null)
+                                {
+                                    <span class="column-badge">⚠</span>
+                                }
+                            </div>
+                        </th>
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var row in Ctx.Table.Rows)
+                {
+                    <tr>
+                        @foreach (var col in Ctx.Table.Columns)
+                        {
+                            var value = col.Index < row.Cells.Count ? row.Cells[col.Index] : "";
+                            var cls = Ctx.Log.FirstOrDefault(l => l.Column == col.Id && l.Row == row.Id);
+                            <td @key="(row.Id, col.Id)" class="@cls?.Level" title="@cls?.Message">
+                                <div class="cell-content">
+                                    <span class="cell-value">@value</span>
+                                    @if (cls != null)
+                                    {
+                                        <span class="cell-indicator"></span>
+                                    }
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
+<style>
+    .xtable-container {
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin: 0;
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .xtable-header {
+        background: linear-gradient(135deg, rgba(26, 115, 232, 0.02) 0%, rgba(21, 87, 176, 0.04) 100%);
+        padding: 20px 28px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        flex-shrink: 0;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .header-icon {
+        font-size: 1.8rem;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    .header-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .header-label {
+        color: #5f6368;
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin: 0;
+    }
+
+    .header-title {
+        color: #1a1a1a;
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+        letter-spacing: -0.3px;
+    }
+
+    .xtable-wrapper {
+        overflow: auto;
+        flex: 1;
+    }
+
+    .xtable-wrapper::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .xtable-wrapper::-webkit-scrollbar-track {
+        background: #f1f3f4;
+    }
+
+    .xtable-wrapper::-webkit-scrollbar-thumb {
+        background: #1a73e8;
+        border-radius: 4px;
+    }
+
+    .xtable-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #1557b0;
+    }
+
+    .xtable {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .xtable thead {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .xtable thead tr {
+        background: linear-gradient(135deg, rgba(26, 115, 232, 0.04) 0%, rgba(21, 87, 176, 0.06) 100%);
+    }
+
+    .xtable th {
+        padding: 14px 20px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.8rem;
+        color: #1a1a1a;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        white-space: nowrap;
+        background: #f8f9fa;
+        letter-spacing: -0.1px;
+    }
+
+    .th-content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .column-title {
+        font-weight: 600;
+    }
+
+    .column-badge {
+        font-size: 0.7rem;
+        opacity: 0.8;
+    }
+
+    .xtable tbody tr {
+        transition: background 0.15s ease;
+        background: white;
+    }
+
+    .xtable tbody tr:hover {
+        background: linear-gradient(135deg, rgba(26, 115, 232, 0.03) 0%, rgba(21, 87, 176, 0.04) 100%);
+    }
+
+    .xtable tbody tr:nth-child(even) {
+        background: #fafbfc;
+    }
+
+    .xtable tbody tr:nth-child(even):hover {
+        background: linear-gradient(135deg, rgba(26, 115, 232, 0.04) 0%, rgba(21, 87, 176, 0.06) 100%);
+    }
+
+    .xtable td {
+        padding: 12px 20px;
+        font-size: 0.8rem;
+        color: #3c4043;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        transition: background 0.15s ease;
+    }
+
+    .cell-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .cell-value {
+        flex: 1;
+    }
+
+    .cell-indicator {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .xtable th.Info,
+    .xtable td.Info {
+        background: linear-gradient(135deg, rgba(26, 115, 232, 0.06) 0%, rgba(21, 87, 176, 0.08) 100%);
+        border-left: 3px solid #1a73e8;
+    }
+
+    .xtable td.Info .cell-indicator {
+        background: #1a73e8;
+        box-shadow: 0 0 6px rgba(26, 115, 232, 0.5);
+    }
+
+    .xtable th.Warning,
+    .xtable td.Warning {
+        background: linear-gradient(135deg, rgba(251, 188, 5, 0.08) 0%, rgba(234, 179, 8, 0.1) 100%);
+        border-left: 3px solid #fbbc05;
+    }
+
+    .xtable td.Warning .cell-indicator {
+        background: #fbbc05;
+        box-shadow: 0 0 6px rgba(251, 188, 5, 0.5);
+    }
+
+    .xtable th.Error,
+    .xtable td.Error {
+        background: linear-gradient(135deg, rgba(234, 67, 53, 0.08) 0%, rgba(219, 68, 55, 0.1) 100%);
+        border-left: 3px solid #ea4335;
+    }
+
+    .xtable td.Error .cell-indicator {
+        background: #ea4335;
+        box-shadow: 0 0 6px rgba(234, 67, 53, 0.5);
+    }
+</style>
+
 @code {
-    [CascadingParameter] public required TablePipelineContext Ctx { get; set; }
+    [Parameter] public required PipelineContext Ctx { get; set; }
 }

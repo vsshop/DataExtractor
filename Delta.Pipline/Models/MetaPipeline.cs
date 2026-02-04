@@ -1,4 +1,4 @@
-﻿namespace Delta.Models;
+﻿namespace Delta.Pipeline.Models;
 
 public sealed class MetaPipeline
 {
@@ -9,11 +9,16 @@ public sealed class MetaPipeline
     private readonly Dictionary<string, int> ids = new();
 
     public int Steps => next;
-    public int Step 
-    { 
-        get => step; 
-        set  { step = value; OnStepChange?.Invoke(); }  
+    public int Step
+    {
+        get => step;
+        set 
+        { 
+            step = value; 
+            OnStepChange?.Invoke(); 
+        }
     }
+
     public int Register()
     {
         var key = $"MetaPipeline{nextId++}";
@@ -24,3 +29,4 @@ public sealed class MetaPipeline
         return idx;
     }
 }
+

@@ -7,34 +7,45 @@ namespace Delta.Excel.Services;
 
 public class CSVReaderService
 {
-    private static Encoding[] Encodes =>
-    [
-        new UTF8Encoding(false, true),
-        Encoding.GetEncoding("iso-8859-1"),
-        Encoding.GetEncoding(1251),
-        Encoding.GetEncoding(1252),
-        Encoding.GetEncoding(1250)
-    ];
-
-    public async Task<Result<DataSet>> ReadAsync(byte[] bytes)
+    static Encoding DetectEncoding(byte[] bytes)
     {
-        Exception? exception = null;
-        foreach (var encode in Encodes)
+        if (bytes.Length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF)
         {
             try
             {
-                using var stream = new MemoryStream(bytes);
-                var config = new ExcelReaderConfiguration()
-                {
-                    FallbackEncoding = encode
-                };
-                using var reader = ExcelReaderFactory.CreateCsvReader(stream, config);
-
-                var data = reader.AsDataSet();
-                return Result<DataSet>.Ok(data);
+                _ = new UTF8Encoding(false, true).GetString(bytes, 3, bytes.Length - 3);
+                return new UTF8Encoding(false, true);
             }
-            catch (Exception ex) { exception = ex; }
+            catch
+            {
+                return Encoding.GetEncoding(1252); 
+            }
         }
-        return Result<DataSet>.Conflict(exception!.Message);
+        return Encoding.GetEncoding(1252);
+    }
+
+    public async Task<Result<DataSet>> ReadAsync(byte[] bytes)
+    {
+        var text = DetectEncoding(bytes).GetString(bytes);
+        var normalized = new UTF8Encoding(false).GetBytes(text);
+
+        using var stream = new MemoryStream(normalized);
+        using var reader = ExcelReaderFactory.CreateCsvReader(stream, new ExcelReaderConfiguration
+        {
+            FallbackEncoding = Encoding.UTF8,
+            AutodetectSeparators = [';'],
+            AnalyzeInitialCsvRows = 50
+        });
+
+        var data = reader.AsDataSet();
+        return Result<DataSet>.Ok(data);
+    }
+
+    public async Task<Result<DataSet>> ReadSetNameAsync(string name, byte[] bytes)
+    {
+        var result = await ReadAsync(bytes);
+        var dataSet = result.Value!;
+        dataSet.Tables[0].TableName = name;
+        return Result<DataSet>.Ok(dataSet);
     }
 }

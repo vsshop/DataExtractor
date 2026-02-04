@@ -26,5 +26,17 @@
   {
     "outputFile": "Blazor/Components/Navigation.razor.css",
     "inputFile": "Blazor/Components/Navigation.razor.scss"
+  },
+  {
+    "outputFile": "Blazor/Components/TablePipline.razor.css",
+    "inputFile": "Blazor/Components/TablePipline.razor.scss"
+  },
+  {
+    "outputFile": "Blazor/Components/Icon.razor.css",
+    "inputFile": "Blazor/Components/Icon.razor.scss"
+  },
+  {
+    "outputFile": "Blazor/Components/Tool.razor.css",
+    "inputFile": "Blazor/Components/Tool.razor.scss"
   }
 ]

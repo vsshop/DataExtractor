@@ -1,0 +1,16 @@
+.input {
+    position: relative;
+
+    .range {
+        position: absolute;
+        pointer-events: none;
+        padding: 0 7px;
+
+        .p {
+            width: 1px;
+            height: 10px;
+            background: #000000;
+            flex-shrink: 0;
+        }
+    }
+}

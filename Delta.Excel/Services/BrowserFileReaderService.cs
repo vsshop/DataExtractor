@@ -17,8 +17,8 @@ public class BrowserFileReaderService(XLSXReaderService xlsx, CSVReaderService c
 
         return file.Extension switch
         {
+            ".csv" => await csv.ReadSetNameAsync(file.DisplayName, bytes),
             ".xlsx" or ".xls" => await xlsx.ReadAsync(bytes),
-            ".csv" => await csv.ReadAsync(bytes),
             ".xml" => await xml.ReadAsync(bytes),
             _ => Result<DataSet>.Validation("")
         };

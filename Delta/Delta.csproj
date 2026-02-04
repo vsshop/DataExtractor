@@ -16,6 +16,10 @@
 	<ItemGroup>
 	  <Content Remove="compilerconfig.json" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Assets\app.ico" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="10.0.30" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
@@ -26,6 +30,22 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Delta.Application\Delta.Application.csproj" />
 	  <ProjectReference Include="..\Delta.Domain\Delta.Domain.csproj" />
-	  <ProjectReference Include="..\Delta.Excel\Delta.Excel.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="Assets\app.ico" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="wwwroot\icons\list.svg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\icons\marker.svg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\icons\pen-to-square.svg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\icons\spell-check.svg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 </Project>

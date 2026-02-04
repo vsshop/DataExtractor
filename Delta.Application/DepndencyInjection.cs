@@ -1,4 +1,5 @@
-﻿using Delta.Application.Services;
+﻿using Delta.Application.Pipelines;
+using Delta.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Delta.Application;
@@ -9,10 +10,18 @@ public static class DepndencyInjection
     {
         public IServiceCollection AddApplication()
         {
-            services.AddScoped<RenameService>();
-            services.AddScoped<SortingService>();
-            services.AddScoped<ReplaceService>();
-            services.AddScoped<ValidateService>();
+            services.AddHttpClient();
+            services.AddScoped<ColumnRenamePipeline>();
+            services.AddScoped<ReplacePipeline>();
+            services.AddScoped<ColumnSortPipeline>();
+            services.AddScoped<ValidatePipeline>();
+            services.AddPipeline(builder =>
+            {
+                builder.Next<ColumnRenamePipeline>()
+                       .Next<ColumnSortPipeline>()
+                       .Next<ReplacePipeline>()
+                       .Next<ValidatePipeline>();
+            });
 
             return services;
         }

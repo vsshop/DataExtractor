@@ -1,0 +1,17 @@
+@inject UISvgService Loader
+
+<span class="icon" @onclick="() => OnClick.InvokeAsync()">
+    @if (svg is not null)
+    {
+        @((MarkupString)svg)
+    }
+</span>
+
+@code {
+    private string? svg;
+
+    [Parameter] public string Url { get; set; } = default!;
+    [Parameter] public EventCallback OnClick { get; set; }
+
+    protected override async Task OnParametersSetAsync() => svg = await Loader.LoadAsync(Url);
+}

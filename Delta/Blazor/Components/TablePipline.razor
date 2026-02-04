@@ -1,4 +1,4 @@
-@inject UITableService UITable
+@* @inject UITableService UITable
 
 <div class="column-m scroll">
 	<CascadingValue Value="meta">
@@ -7,7 +7,7 @@
 			<Pipline Apply="UITable.ApplyRename">
 				<Pipline Apply="UITable.ApplySorting">
 					<Pipline Apply="UITable.ApplyReplace">
-						<Pipline Apply="UITable.ApplyValidate"/>
+						<Pipline Apply="UITable.ApplyValidate" />
 					</Pipline>
 				</Pipline>
 			</Pipline>
@@ -16,7 +16,16 @@
 	</CascadingValue>
 	<div class="row-w">
 		<p class="l1">@meta.Step</p>
-		<div>
+		<div class="input">
+			<div class="range row-w">
+				@for (int i = 0; i < meta.Steps; i++)
+				{
+					<div class="row-w">
+						<div class="p"></div>
+					</div>
+				}
+				<div class="p"></div>
+			</div>
 			<input type="range" min="0" max="@meta.Steps" step="1" @bind="meta.Step" />
 		</div>
 	</div>
@@ -42,4 +51,4 @@
 		if (firstRender) InvokeAsync(StateHasChanged);
 	}
 	protected void RebuildCtx() => ctx = TablePipelineContext.Build(Table, meta.Step);
-}
+} *@

@@ -1,0 +1,108 @@
+﻿.tool-card {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  position: relative;
+  overflow: visible;
+  opacity: 0.6;
+}
+.tool-card:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.tool-card:hover .tool-icon-wrapper .tool-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.tool-card.completed {
+  opacity: 0.4;
+}
+.tool-card.active {
+  background: rgba(26, 115, 232, 0.1);
+  opacity: 1;
+}
+.tool-card.active .tool-icon-container {
+  color: #1a73e8;
+}
+
+.tool-icon-wrapper {
+  position: relative;
+  overflow: visible;
+}
+
+.completion-indicator {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: #34a853;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.tool-icon-container {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  font-size: 16px;
+  color: #5f6368;
+  transition: color 0.15s ease;
+}
+
+.tool-tooltip {
+  position: fixed;
+  bottom: auto;
+  left: auto;
+  transform: translateX(-50%) translateY(-100%);
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: rgba(60, 64, 67, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10000;
+}
+.tool-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(60, 64, 67, 0.95);
+}
+
+.tooltip-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 2px;
+}
+
+.tooltip-status {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.tooltip-status.status-active {
+  color: #8ab4f8;
+}
+.tooltip-status.status-completed {
+  color: #81c995;
+}
+.tooltip-status.status-disabled {
+  color: #9aa0a6;
+}

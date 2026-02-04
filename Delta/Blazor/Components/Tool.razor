@@ -1,0 +1,19 @@
+<div class="tool-card @(Pipeline.Enabled ? "active" : "") @(IsCompleted ? "completed" : "")"
+	 @onclick="Pipeline.Switch"
+	 title="@Pipeline.Title">
+	<div class="tool-icon-wrapper">
+		@if (IsCompleted && Pipeline.Enabled)
+		{
+			<div class="completion-indicator"></div>
+		}
+		<div class="tool-icon-container">
+			<Icon Url="@Pipeline.Icon"/>
+		</div>
+	</div>
+</div>
+
+@code
+{
+	[Parameter, EditorRequired] public BasePipeline Pipeline { get; set; }
+	[Parameter] public bool IsCompleted { get; set; } = false;
+}

@@ -1,4 +1,7 @@
-<Router AppAssembly="@typeof(Index).Assembly">
+@inject UITimerService timer
+@inject PreloadService preload
+
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" />
     </Found>
@@ -9,3 +12,12 @@
         </div>
     </NotFound>
 </Router>
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        timer.Start();
+        await preload.LoadAsync();
+    }
+}
