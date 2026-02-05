@@ -12,7 +12,7 @@ public class UpdatableComponent : ComponentBase, IDisposable
     {
         base.OnInitialized();
 
-        Timer.OnUpdate += OnTick;
+        //Timer.OnUpdate += OnTick;
     }
     private void OnTick()
     {
@@ -28,6 +28,6 @@ public class UpdatableComponent : ComponentBase, IDisposable
     public void Dispose()
     {
         disposed = true;
-        Timer.OnUpdate -= OnTick;
+        //Timer.OnUpdate -= OnTick;
     }
 }

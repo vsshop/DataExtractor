@@ -1,5 +1,5 @@
 @inject UITimerService timer
-@inject PreloadService preload
+@inject LoaderService preload
 
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
@@ -18,6 +18,5 @@
     protected override async Task OnInitializedAsync()
     {
         timer.Start();
-        await preload.LoadAsync();
     }
 }

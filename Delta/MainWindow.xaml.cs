@@ -20,10 +20,12 @@ public partial class MainWindow : Window
         builder.Services.AddReaderServices();
 
         builder.Services.AddScoped<DataService>();
-        builder.Services.AddScoped<PreloadService>();
+        builder.Services.AddScoped<LoaderService>();
 
         builder.Services.AddScoped<UISvgService>();
         builder.Services.AddScoped<UITimerService>();
+        builder.Services.AddScoped<UITableService>();
+        builder.Services.AddScoped<UIWriterService>();
 
         var app = builder.Build();
 

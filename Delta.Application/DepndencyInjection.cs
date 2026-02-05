@@ -15,12 +15,15 @@ public static class DepndencyInjection
             services.AddScoped<ReplacePipeline>();
             services.AddScoped<ColumnSortPipeline>();
             services.AddScoped<ValidatePipeline>();
+            services.AddScoped<RelevantPipeline>();
+
             services.AddPipeline(builder =>
             {
                 builder.Next<ColumnRenamePipeline>()
                        .Next<ColumnSortPipeline>()
                        .Next<ReplacePipeline>()
-                       .Next<ValidatePipeline>();
+                       .Next<ValidatePipeline>()
+                       .Next<RelevantPipeline>();
             });
 
             return services;

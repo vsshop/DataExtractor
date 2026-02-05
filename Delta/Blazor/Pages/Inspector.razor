@@ -1,21 +1,24 @@
 @page "/"
 @inherits UpdatableComponent
-@inject DataService DataService
-@inject PreloadService Preloader
+
+@inject LoaderService Loader
+@inject UITableService Service
 @inject NavigationManager Nav
-@inject IReaderService Reader
 
 <div class="row-m inspector-page">
     <aside class="sidebar column-m">
-        <div class="sidebar-header">
+        <label class="sidebar-header" for="xml">
             <svg class="icon" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                <path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
             </svg>
             <span class="header-text">Index File</span>
-            <InputFile OnChange="HandleXMLSelected" multiple class="file-input" />
-        </div>
+            <div class="file-input">
+                <InputFile OnChange="HandleXMLSelected" multiple id="xml"/>
+            </div>
+        </label>
+       
         <nav class="menu-list column-w">
-            @foreach (var table in Preloader.XMLTables)
+            @foreach (var table in Loader.XMLTables)
             {
                 <button class="menu-item">@table.Title</button>
             }
@@ -44,31 +47,30 @@
             <section class="card">
                 <div class="card-header">
                     <h2>Checked Files</h2>
-                    @if (inspectorData.Any())
+                    @if (Loader.CSVTables.Any())
                     {
-                        <span class="badge">@inspectorData.Count</span>
+                        <span class="badge">@Loader.CSVTables.Count</span>
                     }
                 </div>
                 <div class="card-body">
-                    <div class="file-list column-w gap8">
-                        @foreach (var data in Preloader.CSVTables)
-                        {
-                            <div class="chip row gap8">
-                                <svg class="chip-icon" viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z" />
-                                </svg>
-                                <span class="chip-text">@data.Title</span>
-                                <button class="chip-remove">
-                                    <svg viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        }
-                    </div>
-                    @* @if (inspectorData.Any())
+                    @if (Loader.CSVTables.Any())
                     {
-                        
+                        <div class="file-list column-w gap8">
+                            @foreach (var table in Loader.CSVTables)
+                            {
+                                <div class="chip row gap8">
+                                    <svg class="chip-icon" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z" />
+                                    </svg>
+                                    <span class="chip-text l1">@table.Title</span>
+                                    <button class="chip-remove" @onclick="() => RemoveTable(table)">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            }
+                        </div>
                     }
                     else
                     {
@@ -78,7 +80,7 @@
                             </svg>
                             <span class="empty-text">No files selected</span>
                         </div>
-                    } *@
+                    }
                 </div>
             </section>
 
@@ -95,43 +97,17 @@
 </div>
 
 @code {
-    private DataSet? xml;
-    private List<InspectorData> inspectorData = new();
-
-    private class InspectorData
-    {
-        public string Name { get; set; } = string.Empty;
-    }
-
-
-    private void Clear()
-    {
-        inspectorData.Clear();
-    }
-
     private async Task Process()
     {
-        await Preloader.BuildTables();
+        await Service.BuildTables();
         Nav.NavigateTo("/process");
     }
 
-    private void RemoveFile(InspectorData data)
-    {
-        inspectorData.Remove(data);
-    }
+    private void Clear() => Loader.CSVTables.Clear();
 
-    private async Task HandleFileSelected(InputFileChangeEventArgs e)
-    {
-        // UITable.Tables = await BuildService.Build(xml!, e.GetMultipleFiles());
-        foreach (var file in e.GetMultipleFiles())
-        {
-            inspectorData.Add(new InspectorData { Name = file.Name });
-        }
-    }
+    private void RemoveTable(Table table) => Loader.CSVTables.Remove(table);
 
-    private async Task HandleXMLSelected(InputFileChangeEventArgs e)
-    {
-        var result = await Reader.ReadAsync(e.File);
-        xml = result.Value;
-    }
+    private Task HandleFileSelected(InputFileChangeEventArgs e) => Loader.OpenCSVS(e.GetMultipleFiles());
+
+    private Task HandleXMLSelected(InputFileChangeEventArgs e) => Loader.OpenXML(e.File);
 }

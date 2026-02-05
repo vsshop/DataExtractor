@@ -9,6 +9,10 @@
   background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
 }
 
+.file-input {
+  display: none;
+}
+
 .sidebar {
   width: 300px;
   min-width: 300px;
@@ -28,6 +32,7 @@
   color: #5f6368;
   font-size: 14px;
   font-weight: 500;
+  cursor: pointer;
 }
 .sidebar-header .icon {
   width: 20px;
@@ -149,6 +154,7 @@
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
 }
 .card:hover {
   transform: translateY(-4px);
@@ -197,6 +203,7 @@
   border-radius: 12px;
   align-items: center;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
 }
 .chip:hover {
   background: linear-gradient(135deg, rgba(26, 115, 232, 0.1) 0%, rgba(21, 87, 176, 0.12) 100%);

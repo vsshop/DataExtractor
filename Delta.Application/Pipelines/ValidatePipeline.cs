@@ -52,13 +52,24 @@ public class ValidatePipeline(IReaderService reader, IHostEnvironment environmen
                 foreach (var (rx, repl) in regexRules)
                 {
                     if (!rx.IsMatch(value)) continue;
+                    var level = (LevelCode) repl.Level;
 
+                    if (level == LevelCode.Error)
+                    {
+                        row.Cells[column.Index] += "​";
+                    }
+
+                    if(level == LevelCode.Warning)
+                    {
+                        row.Cells[column.Index] += "⁠";
+                    }
+                    
                     context.Log.Add(new()
                     {
                         Row = row.Id,
                         Column = column.Id,
                         Message = repl.Message,
-                        Level = (LevelCode)repl.Level
+                        Level = level
                     });
                     break;
                 }

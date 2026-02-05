@@ -20,10 +20,6 @@
   padding: 6px 8px;
   font-size: 14px;
 }
-.table th.red, .table td.red {
-  border: 1px solid red;
-  background: rgba(255, 0, 0, 0.1882352941);
-}
 .table th.Info, .table td.Info {
   border: 1px solid blue;
   background: rgba(17, 17, 169, 0.1490196078);

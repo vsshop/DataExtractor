@@ -1,9 +1,9 @@
 @page "/process"
-@using Delta.Pipeline.Abstracts
 @inherits UpdatableComponent
+
 @inject PipelineService service
-@inject DataService data
-@inject PreloadService preloader
+@inject UIWriterService writer
+@inject UITableService UITable
 @inject NavigationManager Nav
 
 <div class="index-page">
@@ -15,7 +15,7 @@
             <span class="header-text">Таблицы</span>
         </div>
         <nav class="table-list">
-            @foreach (var table in preloader.Tables)
+            @foreach (var table in UITable.Tables)
             {
                 var isSelected = selectedTable?.Id == table.Id;
                 <button class="table-item @(isSelected ? "selected" : "")" @onclick="() => SelectTable(table)">
@@ -105,7 +105,7 @@
                             <div class="timeline-item @cssClass">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-content">
-                                    <Tool Pipeline="pipeline" IsCompleted="isCompleted"></Tool>
+                                    <Tool Pipeline="pipeline" IsCompleted="isCompleted" OnChange="ToolChange"></Tool>
                                 </div>
                                 @if (i < service.Pipelines.Count - 1)
                                 {
@@ -520,71 +520,72 @@
 
     protected override async Task OnInitializedAsync()
     {
-        selectedTable = data.Tables.FirstOrDefault();
+        selectedTable = UITable.Tables.FirstOrDefault();
         await Rebuild();
         currentIndex = service.Pipelines.Count - 1;
     }
 
-	protected override Task OnUITick() => Rebuild();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) await Rebuild();
 
-	protected override void OnAfterRender(bool firstRender)
-	{
-		if (service.Pipelines.Count > 0)
-		{
-			canScrollRight = currentIndex < service.Pipelines.Count - 1;
-			canScrollLeft = currentIndex > 0;
-		}
-	}
+        if (service.Pipelines.Count > 0)
+        {
+            canScrollRight = currentIndex < service.Pipelines.Count - 1;
+            canScrollLeft = currentIndex > 0;
+        }
+    }
 
-	private async Task SelectTable(Table table)
-	{
-		selectedTable = table;
-		await Rebuild();
-	}
+    private async Task SelectTable(Table table)
+    {
+        selectedTable = table;
+        await Rebuild();
+    }
 
-	private void NavigateToInspector()
-	{
-		Nav.NavigateTo("/");
-	}
+    private void NavigateToInspector()
+    {
+        Nav.NavigateTo("/");
+    }
 
-	private void ScrollLeft()
-	{
-		if (currentIndex > 0)
-		{
-			currentIndex--;
-			StateHasChanged();
-		}
-	}
+    private async Task ScrollLeft()
+    {
+        if (currentIndex > 0)
+        {
+            currentIndex--;
+            await Rebuild();
+        }
+    }
 
-	private void ScrollRight()
-	{
-		if (currentIndex < service.Pipelines.Count - 1)
-		{
-			currentIndex++;
-			StateHasChanged();
-		}
-	}
+    private async Task ScrollRight()
+    {
+        if (currentIndex < service.Pipelines.Count - 1)
+        {
+            currentIndex++;
+            await Rebuild();
+        }
+    }
 
-	public async Task ChangePipline(BasePipeline pipeline)
-	{
-		pipeline.Switch();
-		await Rebuild();
-	}
-
-	public async Task Rebuild()
-	{
-		if (selectedTable != null)
-		{
-			ctx = PipelineContext.Build(selectedTable);
+    public async Task Rebuild()
+    {
+        if (selectedTable != null)
+        {
+            ctx = PipelineContext.Build(selectedTable);
             await service.InvokeAsync(ctx, currentIndex);
-		}
-	}
+            await InvokeAsync(StateHasChanged);
+        }
+    }
 
     public async Task SaveCurrent()
-	{
-	}
+    {
+        if (selectedTable is null) return;
+        
+        await writer.WriteAsync(selectedTable);
+    }
 
     public async Task SaveAll()
-	{
-	}
+    {
+        await writer.WriteAsync(UITable.Tables);
+    }
+
+    public Task ToolChange() => Rebuild();
 }

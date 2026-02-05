@@ -23,7 +23,8 @@
             <tbody>
                 @foreach (var row in Ctx.Table.Rows)
                 {
-                    <tr>
+                    var select = Ctx.Log.FirstOrDefault(l => l.Column == default && l.Row == row.Id);
+                    <tr class="@(select is not null ? "active" : "")" title="@select?.Message">
                         @foreach (var col in Ctx.Table.Columns)
                         {
                             var value = col.Index < row.Cells.Count ? row.Cells[col.Index] : "";
@@ -184,6 +185,7 @@
         background: linear-gradient(135deg, rgba(26, 115, 232, 0.04) 0%, rgba(21, 87, 176, 0.06) 100%);
     }
 
+
     .xtable td {
         padding: 12px 20px;
         font-size: 0.8rem;
@@ -212,7 +214,7 @@
 
     .xtable th.Info,
     .xtable td.Info {
-        background: linear-gradient(135deg, rgba(26, 115, 232, 0.06) 0%, rgba(21, 87, 176, 0.08) 100%);
+        background: #e3f1ff; 
         border-left: 3px solid #1a73e8;
     }
 
@@ -241,6 +243,11 @@
     .xtable td.Error .cell-indicator {
         background: #ea4335;
         box-shadow: 0 0 6px rgba(234, 67, 53, 0.5);
+    }
+
+
+    .xtable tr.active td:first-child {
+        border-left: 3px solid #1a73e8 !important;
     }
 </style>
 
