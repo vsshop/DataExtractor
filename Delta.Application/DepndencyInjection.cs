@@ -16,6 +16,7 @@ public static class DepndencyInjection
             services.AddScoped<ColumnSortPipeline>();
             services.AddScoped<ValidatePipeline>();
             services.AddScoped<RelevantPipeline>();
+            services.AddScoped<SplitAddressPipeline>();
 
             services.AddPipeline(builder =>
             {
@@ -23,7 +24,8 @@ public static class DepndencyInjection
                        .Next<ColumnSortPipeline>()
                        .Next<ReplacePipeline>()
                        .Next<ValidatePipeline>()
-                       .Next<RelevantPipeline>();
+                       .Next<RelevantPipeline>()
+                       .Next<SplitAddressPipeline>();
             });
 
             return services;
